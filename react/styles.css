@@ -1,93 +1,23 @@
-.mobileNavMenuContainer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    padding: 0.1rem 0;
-}
+.mobileSubmenuContainer {}
 
-.mobileNavOverlay {
-    position: fixed;
-    inset: 0;
-    background-color: #262626;
-    opacity: 0.5;
-    z-index: 9;
-}
+.mobileSubmenuWrapper {}
 
-.hamburgerContainer {}
+.mobileNav {}
 
-.hamburgerWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid white;
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    cursor: pointer;
-}
+.mobileMenuTitle {}
 
-.hamburgerLine {
-    width: 100%;
-    height: 2px;
-    background-color: white;
-    border-radius: 2px;
-}
+.mobileMenuTitleLink {}
 
-.navigationContainer {
-    position: fixed;
-    left: -100%;
-    top: 0;
-    width: 90vw;
-    height: 100vh;
-    background-color: white;
-    z-index: 10;
+.mobileMainMenuItemContainer {}
 
-    transition: left 250ms ease-out;
-}
+.mobileMainMenuItemWrapper {}
 
-.navigationWrapper {
-    position: relative;
-}
+.mobileMainMenuItem {}
 
-.closeMobileNavButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    border: 2px solid black;
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: bold;
-    height: 2.5rem;
-    width: 2.5rem;
-    text-align: center;
-    background-color: white;
-}
+.mobileMainMenuItem::after {}
 
-.logoContainer {}
+.backToButtonContainer {}
 
-.logoWrapper {
-    display: flex;
-    justify-content: center;
-}
+.backToButtonWrapper {}
 
-.mobileLogo {
-    height: 3rem;
-}
-
-.childrenContainer {
-    display: flex;
-    justify-content: center;
-    background-color: #4d4d4d;
-    width: 100%;
-}
-
-.childrenWrapper {
-    width: 100%;
-}
+.backToMenuButton {}
