@@ -12,7 +12,12 @@ interface MobileSubmenuProps {
 interface MainMenuObject {
   title: string
   titleLink: string
-  menu: Array<string>
+  menu: Array<string | LinkObject>
+}
+
+interface LinkObject {
+  text: string
+  link: string
 }
 
 const MobileSubmenu: StorefrontFunctionComponent<MobileSubmenuProps> = ({ children, mainMenu }) => {
@@ -20,24 +25,25 @@ const MobileSubmenu: StorefrontFunctionComponent<MobileSubmenuProps> = ({ childr
   const [subLevelOne, setSubLevelOne] = useState<Boolean>(true);
   const [menuTitle, setMenuTitle] = useState<string>(mainMenu.title);
   const [menuTitleLink, setMenuTitleLink] = useState<string>(mainMenu.titleLink);
-  const [subMenuTitle, setSubMenuTitle] = useState<string>("");
 
   const handleClickMain = (e: any) => {
-    console.clear();
     const clicked = e.currentTarget;
-
     const childToLoad = clicked.dataset.mainmenuitem;
+    const directLink = clicked.dataset.directlink;
 
-    // @ts-expect-error
-    setActiveSubmenu(children[childToLoad]);
-    setSubLevelOne(false);
-    setMenuTitle(mainMenu.title);
-    setSubMenuTitle(mainMenu.menu[childToLoad]);
+    if (directLink === "false") {
+      // @ts-expect-error
+      setActiveSubmenu(children[childToLoad]);
+      setSubLevelOne(false);
+      setMenuTitle(mainMenu.title);
+    } else {
+      // @ts-expect-error
+      document.location = directLink;
+    }
   }
 
   const handleBackToMain = () => {
     setSubLevelOne(true);
-    console.log("Back")
   }
 
   return (
@@ -49,10 +55,10 @@ const MobileSubmenu: StorefrontFunctionComponent<MobileSubmenuProps> = ({ childr
             <nav className={styles.mobileNav}>
               {
                 mainMenu.menu.map((item, index) => (
-                  <div key={`${index}_${item}`} onClick={handleClickMain} data-mainmenuitem={index} className={styles.mobileMainMenuItemContainer}>
+                  <div key={(typeof item === "string") ? `${index}_${item}` : `${index}_${item.text}`} onClick={handleClickMain} data-directlink={item.link ? item.link : "false"} data-mainmenuitem={index} className={styles.mobileMainMenuItemContainer}>
                     <div className={styles.mobileMainMenuItemWrapper}>
-                      <div className={styles.mobileMainMenuItem}>
-                        {item}
+                      <div className={item.link ? styles.mobileMainMenuItemLink : styles.mobileMainMenuItem}>
+                        {(typeof item === "string") ? item : item.text}
                       </div>
                     </div>
                   </div>
@@ -77,10 +83,49 @@ const MobileSubmenu: StorefrontFunctionComponent<MobileSubmenuProps> = ({ childr
 }
 
 MobileSubmenu.schema = {
-  title: 'editor.mobilesubmenu.title',
+  title: 'Mobile Sub Menu',
   description: 'editor.mobilesubmenu.description',
   type: 'object',
-  properties: {}
+  properties: {
+    mainMenu: {
+      type: "object",
+      title: "Sub Menu",
+      properties: {
+        title: {
+          type: "string",
+          title: "Sub Menu Title"
+        },
+        titleLink: {
+          title: "Title Link",
+          description: "Link to 'All' products",
+          type: "string"
+        },
+        menu: {
+          title: "Menu List",
+          description: "Do not change the order of these items.",
+          type: "array",
+          items: {
+            properties: {
+              __editorItemTitle: {
+                title: "Site Editor Item Title",
+                desciption: "Only visible in Site Editor",
+                type: "string",
+              },
+              text: {
+                title: "Menu Item Text",
+                type: "string",
+              },
+              link: {
+                title: "Menu Item Link",
+                description: "Only used if menu item has no submenu.",
+                type: "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 export default MobileSubmenu;
