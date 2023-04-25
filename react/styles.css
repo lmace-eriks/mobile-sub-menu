@@ -1,14 +1,12 @@
 .mobileSubmenuContainer {}
 
-.mobileSubmenuWrapper {}
-
 .mobileNav {}
-
-.mobileMenuTitle {}
 
 .mobileMenuTitleLink {}
 
-.mobileMainMenuItemContainer {}
+.submenuTitle {}
+
+.mobileMainMenuItemButton {}
 
 .mobileMainMenuItemWrapper {}
 
@@ -23,3 +21,17 @@
 .backToButtonWrapper {}
 
 .backToMenuButton {}
+
+.loadingDirectLink {}
+
+.arrow {}
+
+.plus {}
+
+.mobileMainMenuItemButton:focus-visible,
+.mobileMenuTitleLink:focus-visible,
+.backToMenuButton:focus-visible,
+:global(.vtex-menu-2-x-styledLink--header-submenu-nav):focus-visible,
+:global(.vtex-store-link-0-x-link--header-submenu-title):focus-visible {
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255, 0, 0, 0.25) 20px, rgba(255, 0, 0, 0.25) 40px);
+}
